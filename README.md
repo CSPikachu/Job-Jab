@@ -1,4 +1,1 @@
 # Pikachu
-
-hello
-goodbye
