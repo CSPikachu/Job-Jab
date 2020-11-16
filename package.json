@@ -1,39 +1,58 @@
 {
-  "name": "pikachu",
+  "name": "appchap",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --colors",
+    "start": "NODE_ENV=production nodemon server/server.js",
+    "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack serve",
+    "build": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CSPikachu/Pikachu.git"
   },
-  "author": "",
+  "author": "Pikachu",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CSPikachu/Pikachu/issues"
   },
   "homepage": "https://github.com/CSPikachu/Pikachu#readme",
+  "jest": {
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js"
+  },
   "dependencies": {
     "babel": "^6.23.0",
+    "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
     "express": "^4.17.1",
-    "install": "^0.13.0",
-    "jest": "^26.6.3",
     "npm": "^6.14.8",
-    "supertest": "^6.0.1",
-    "webpack": "^5.4.0",
-    "webpack-dev-server": "^3.11.0"
+    "path": "^0.12.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "redux": "^4.0.5",
+    "supertest": "^6.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/node": "^7.12.6",
     "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.1",
-    "nodemon": "^2.0.6"
+    "css-loader": "^5.0.1",
+    "enzyme-to-json": "^3.6.1",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.6",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.11.0"
   }
 }
