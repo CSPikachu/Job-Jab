@@ -1,5 +1,1 @@
 # Pikachu
-
-hello
-goodbye
-fizzbuzz
