@@ -27,11 +27,13 @@
   },
   "dependencies": {
     "babel": "^6.23.0",
+    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
     "express": "^4.17.1",
     "npm": "^6.14.8",
     "path": "^0.12.7",
+    "pg": "^8.5.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "redux": "^4.0.5",

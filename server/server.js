@@ -1,16 +1,25 @@
 const express = require('express');
 const path = require('path');
 const PORT = 3000;
-
+const bodyParser = require('body-parser')
 const app = express();
+const jobAppsRouter = require('./routes/api.js');
+
 
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+
+app.use('/jobApps', jobAppsRouter)
 
 // Respond with index.html file when user opens the page
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../index.html'));
 });
+
+// app.get('/signin', (req, res) => {})
+// app.get('/register', (req, res) => {})
 
 
 // Global error handler
