@@ -14,6 +14,11 @@ app.get("/", (req, res) => {
 // statically serve everything in the build folder on the route '/build'
 app.use("/dist", express.static(path.join(__dirname, "../dist")));
 
+//catch all for react router
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../index.html"));
+});
+
 // Global error handler
 app.use((err, req, res, next) => {
   console.log(`Global error handler received this error: ${err}`);

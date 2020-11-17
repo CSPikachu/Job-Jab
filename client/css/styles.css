@@ -1,3 +1,13 @@
-.css-59ald0 {
-  width: 100px;
+.appsContainer {
+  display: flex;
+}
+
+.apps {
+  display: inline-flex;
+  margin-right: 30px;
+}
+
+.container {
+  padding: 20px;
+  margin: 20px;
 }

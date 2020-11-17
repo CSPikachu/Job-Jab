@@ -12,14 +12,16 @@ import {
 
 const Register = () => {
   return (
-    <Container>
+    <Container className="container">
       <Heading>JOB JAB REGISTER</Heading>
       <FormControl id="register">
         <FormLabel>Email address</FormLabel>
         <Input type="email" />
         <FormLabel>Password</FormLabel>
         <Input type="password" />
-        <Button colorScheme="teal">Submit</Button>
+        <Button style={{ marginTop: "8px" }} colorScheme="teal">
+          Submit
+        </Button>
       </FormControl>
     </Container>
   );

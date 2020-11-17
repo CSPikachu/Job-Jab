@@ -12,14 +12,16 @@ import {
 
 const Login = () => {
   return (
-    <Container>
+    <Container className="container">
       <Heading>JOB JAB LOGIN</Heading>
       <FormControl id="register">
         <FormLabel>Email address</FormLabel>
         <Input type="email" />
         <FormLabel>Password</FormLabel>
         <Input type="password" />
-        <Button colorScheme="teal">Submit</Button>
+        <Button colorScheme="teal" style={{ marginTop: "8px" }}>
+          Submit
+        </Button>
       </FormControl>
     </Container>
   );
