@@ -6,21 +6,17 @@ const { Pool } = require('pg');
 //   database: 'jobjab',
 //   password: 'kruchin',
 //   port: 5432,
-
 //   connectionString:
 // })
-
 const PG_URI =
   'postgres://rbupcsle:n4-9r8bhAnROYawuMjrFG4k5QQD_guEy@ruby.db.elephantsql.com:5432/rbupcsle';
 
 const pool = new Pool({
   connectionString: PG_URI,
 });
-
 // In a production environment, you would want to put your configuration details in a separate file with
 // restrictive permissions that is not accessible from version control, but for the simplicity of this tutorial ,
-// we’re keeping it in the same file as the queries.
-
+// we're keeping it in the same file as the queries.
 const getApps = (req, res, next) => {
   console.log('HIT GET APPS');
   pool.query(
@@ -53,10 +49,8 @@ JOIN status ON job_application_page.statusid = status.id`,
     }
   );
 };
-
 const getAppById = (req, res) => {
   const id = parseInt(req.params.id);
-
   pool.query(
     'SELECT * FROM job_application_page WHERE id = $1',
     [id],
@@ -69,7 +63,6 @@ const getAppById = (req, res) => {
     }
   );
 };
-
 const createApp = (req, res) => {
   const {
     userid,
@@ -85,7 +78,6 @@ const createApp = (req, res) => {
     date_submitted,
     offer_salary,
   } = req.body;
-
   //  pool.query('INSERT INTO users (firstname, lastname) VALUES ($1, $2)', [firstname, lastname], (err, results) => {
   pool.query(
     `INSERT INTO job_application_page (
@@ -124,7 +116,6 @@ const createApp = (req, res) => {
     }
   );
 };
-
 const updateApp = (req, res) => {
   const id = parseInt(req.params.id);
   const {
@@ -141,22 +132,21 @@ const updateApp = (req, res) => {
     offer_salary,
     userid,
   } = req.body;
-
   pool.query(
     // 'UPDATE users set NAME = $1, email = $2 WHERE id = $3',
     // [name, email, id],
-    `UPDATE job_application_page SET 
-    application_name = $2, 
-    sourceid = $3, 
-    statusid = $4, 
-    application_folder_link = $5, 
-    resume_doc_link = $6, 
-    resume_pdf_link = $7, 
-    cover_letter_doc_link = $8, 
-    cover_letter_pdf_link = $9, 
-    notes = $10, 
-    date_submitted = $11, 
-    offer_salary = $12, 
+    `UPDATE job_application_page SET
+    application_name = $2,
+    sourceid = $3,
+    statusid = $4,
+    application_folder_link = $5,
+    resume_doc_link = $6,
+    resume_pdf_link = $7,
+    cover_letter_doc_link = $8,
+    cover_letter_pdf_link = $9,
+    notes = $10,
+    date_submitted = $11,
+    offer_salary = $12,
     userid = $13
     WHERE id = $1`,
     [
@@ -182,10 +172,8 @@ const updateApp = (req, res) => {
     }
   );
 };
-
 const deleteApp = (req, res) => {
   const id = parseInt(req.params.id);
-
   pool.query(
     'DELETE FROM job_application_page WHERE id = $1',
     [id],
@@ -197,7 +185,6 @@ const deleteApp = (req, res) => {
     }
   );
 };
-
 module.exports = {
   getApps,
   getAppById,
