@@ -20,7 +20,7 @@ const pool = new Pool({
 // restrictive permissions that is not accessible from version control, but for the simplicity of this tutorial , 
 // we’re keeping it in the same file as the queries.
 
-const getUsers = (req, res) => {
+const getApps = (req, res) => {
   pool.query(
 //    'SELECT * FROM job_application_page ORDER BY id ASC',
      `SELECT job_application_page.id AS id,
@@ -42,8 +42,7 @@ const getUsers = (req, res) => {
 FROM job_application_page
 JOIN users ON job_application_page.userid = users.id
 JOIN sources ON job_application_page.sourceid = sources.id
-JOIN status ON job_application_page.job_app_status_id = status.id
-LIMIT 1`,
+JOIN status ON job_application_page.job_app_status_id = status.id`,
      (err, results) => {
     if (err) {
       throw error;
@@ -52,10 +51,10 @@ LIMIT 1`,
   })
 };
 
-const getUserById = (req, res) => {
+const getAppById = (req, res) => {
   const id = parseInt(req.params.id)
 
-  pool.query('SELECT * FROM users WHERE id = $1', [id], (err, results) => {
+  pool.query('SELECT * FROM job_application_page WHERE id = $1', [id], (err, results) => {
     if (err) {
       throw error;
     }
@@ -64,18 +63,60 @@ const getUserById = (req, res) => {
   })
 };
 
-const createUser = (req, res) => {
-  const { name, email } = req.body;
+const createApp = (req, res) => {
+  const { 
+  userid, 
+  application_name, 
+  sourceid,
+  statusid,
+  application_folder_link, 
+  resume_doc_link, 
+  resume_pdf_link, 
+  cover_letter_doc_link, 
+  cover_letter_pdf_link, 
+  notes, 
+  date_submitted, 
+  offer_salary, 
+  creation_date  } = req.body;
 
-  pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (err, results) => {
+//  pool.query('INSERT INTO users (firstname, lastname) VALUES ($1, $2)', [firstname, lastname], (err, results) => {
+  pool.query(
+    `INSERT INTO job_application_page (
+      userid, 
+      application_name, 
+      sourceid, 
+      statusid,
+      application_folder_link, 
+      resume_doc_link, 
+      resume_pdf_link, 
+      cover_letter_doc_link, 
+      cover_letter_pdf_link, 
+      notes, 
+      date_submitted, 
+      offer_salary, 
+      creation_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`, 
+  [userid, 
+    application_name, 
+    sourceid, 
+    statusid,
+    application_folder_link, 
+    resume_doc_link, 
+    resume_pdf_link, 
+    cover_letter_doc_link, 
+    cover_letter_pdf_link, 
+    notes, 
+    date_submitted, 
+    offer_salary, 
+    creation_date], (err, results) => {
     if (err) {
+      console.log(err);
       throw error;
     }
-    res.status(201).send(`User succesfully added with name: ${name} & email: ${email}`); // 201 refers to succesful creation of a resource
+    res.status(201).send(`User succesfully added a new application`); // 201 refers to succesful creation of a resource
   })
 };
 
-const updateUser = (req, res) => {
+const updateApp = (req, res) => {
   const id = parseInt(req.params.id);
   const { name, email } = req.body;
 
@@ -91,7 +132,7 @@ const updateUser = (req, res) => {
   )
 };
 
-const deleteUser = (req, res) => {
+const deleteApp = (req, res) => {
   const id = parseInt(req.params.id)
 
   pool.query('DELETE FROM users WHERE id = $1', [id], (err, results) => {
@@ -103,9 +144,9 @@ const deleteUser = (req, res) => {
 }
 
 module.exports = {
-  getUsers,
-  getUserById,
-  createUser,
-  updateUser,
-  deleteUser,
+  getApps,
+  getAppById,
+  createApp,
+  updateApp,
+  deleteApp,
 };

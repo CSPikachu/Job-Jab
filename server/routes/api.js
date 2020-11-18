@@ -3,11 +3,11 @@ const express = require('express');
 const jobAppsController = require('../controllers/jobAppsController.js')
 const jobAppsRouter = express.Router()
 
-jobAppsRouter.get('/users', db.getUsers);
-jobAppsRouter.get('/users/:id', db.getUserById);
-jobAppsRouter.post('/users', db.createUser);
-jobAppsRouter.put('/users/:id', db.updateUser);
-jobAppsRouter.delete('/users/:id', db.deleteUser);
+jobAppsRouter.get('/', db.getApps);
+jobAppsRouter.get('/:id', db.getAppById);
+jobAppsRouter.post('/', db.createApp);
+jobAppsRouter.put('/:id', db.updateApp);
+jobAppsRouter.delete('/:id', db.deleteApp);
 
 // jobAppsRouter.get('/', jobAppsController.getApps, (req, res) => {
 //   res.status(200).send(res.locals.apps)
