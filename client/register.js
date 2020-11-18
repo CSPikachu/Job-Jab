@@ -13,7 +13,7 @@ import {
 const Register = () => {
   return (
     <Container className="container">
-      <Heading>JOB JAB REGISTER</Heading>
+      <Heading className="headers">JOB JAB REGISTER</Heading>
       <FormControl id="register">
         <FormLabel>Email address</FormLabel>
         <Input type="email" />

@@ -18,7 +18,10 @@ import {
   FormLabel,
   Input,
   ModalFooter,
+  useDisclosure,
+  Lorem,
 } from "@chakra-ui/react";
+import NewAppModal from "./newAppModal";
 
 class JobApps extends Component {
   constructor() {
@@ -47,7 +50,7 @@ class JobApps extends Component {
   }
 
   componentDidMount() {
-    fetch("/jobapps/users")
+    fetch("/jobapps")
       .then((response) => response.json())
       .then((data) => {
         this.setState({ apps: data });
@@ -77,6 +80,7 @@ class JobApps extends Component {
             <Text fontSize="sm">{el.application_folder_link}</Text>
             <Text fontSize="sm">{el.date_submitted}</Text>
             <Badge colorScheme="teal">{"$" + el.offer_salary}</Badge>
+            <Button>Delete</Button>
           </Box>
         </Flex>
       );
@@ -84,7 +88,7 @@ class JobApps extends Component {
     return (
       <div style={{ marginLeft: "10%", marginRight: "10%" }}>
         <Heading style={{ padding: "20px" }}>Your Job Apps</Heading>
-        <Button>+ New Job App </Button>
+        <NewAppModal />
         <Heading>{apps}</Heading>
       </div>
     );

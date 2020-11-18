@@ -5,6 +5,7 @@ import { ChakraProvider, HStack, Divider, Center } from "@chakra-ui/react";
 import Register from "./register";
 import Login from "./login";
 import JobApps from "./jobapps";
+import HomePage from "./homepage";
 
 class App extends Component {
   constructor() {
@@ -18,50 +19,58 @@ class App extends Component {
       <div>
         <ChakraProvider>
           <Router>
-            <div>
-              <nav style={{ padding: "10px", color: "blue", fontSize: "15pt" }}>
-                <HStack spacing="2rem">
+            <div className="navContainer">
+              <nav className="navbar">
+                <HStack spacing="1.5rem">
                   {!this.state.loggedIn && (
                     <>
-                      <Link to="/register" style={{ textAlign: "center" }}>
-                        Register
-                      </Link>
+                      <Link to="/">Home</Link>
+                      <Center height="50px" paddingRight="20px">
+                        <Divider orientation="vertical" />
+                      </Center>
+                      <Link to="/login">Login</Link>
                       <Center height="50px">
                         <Divider orientation="vertical" />
                       </Center>
-                      <Link to="/login" style={{ textAlign: "center" }}>
-                        Login
-                      </Link>
+                      <Link to="/register">Register</Link>
+                      <img
+                        style={{ alignContent: "center" }}
+                        src="../imgs/Logo.png"
+                        alt="logo"
+                      ></img>
                     </>
                   )}
                   {this.state.loggedIn && (
                     <>
-                      <Link to="/jobapps" style={{ textAlign: "center" }}>
-                        Job Apps
-                      </Link>
+                      <Link to="/">Home</Link>
+                      <Center height="50px" paddingRight="20px">
+                        <Divider orientation="vertical" />
+                      </Center>
+                      <Link to="/login">Log Out</Link>
                       <Center height="50px">
                         <Divider orientation="vertical" />
                       </Center>
-                      <Link to="/login" style={{ textAlign: "center" }}>
-                        Log Out
-                      </Link>
+                      <Link to="/jobapps">Job Apps</Link>
                     </>
                   )}
                 </HStack>
               </nav>
               <Divider orientation="horizontal" />
               <Switch>
+                {this.state.loggedIn && (
+                  <Route path="/jobapps">
+                    <JobApps />
+                  </Route>
+                )}
                 <Route path="/register">
                   <Register />
                 </Route>
                 <Route path="/login">
                   <Login />
                 </Route>
-                {this.state.loggedIn && (
-                  <Route path="/jobapps">
-                    <JobApps />
-                  </Route>
-                )}
+                <Route path="/">
+                  <HomePage />
+                </Route>
               </Switch>
             </div>
           </Router>
