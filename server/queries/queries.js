@@ -83,7 +83,6 @@ const createApp = (req, res) => {
     notes,
     date_submitted,
     offer_salary,
-    creation_date,
   } = req.body;
 
   //  pool.query('INSERT INTO users (firstname, lastname) VALUES ($1, $2)', [firstname, lastname], (err, results) => {
@@ -100,8 +99,7 @@ const createApp = (req, res) => {
       cover_letter_pdf_link, 
       notes, 
       date_submitted, 
-      offer_salary, 
-      creation_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
+      offer_salary) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
     [
       userid,
       application_name,
@@ -115,7 +113,6 @@ const createApp = (req, res) => {
       notes,
       date_submitted,
       offer_salary,
-      creation_date,
     ],
     (err, results) => {
       if (err) {
@@ -129,11 +126,53 @@ const createApp = (req, res) => {
 
 const updateApp = (req, res) => {
   const id = parseInt(req.params.id);
-  const { name, email } = req.body;
+  const {
+    application_name,
+    sourceid,
+    statusid,
+    application_folder_link,
+    resume_doc_link,
+    resume_pdf_link,
+    cover_letter_doc_link,
+    cover_letter_pdf_link,
+    notes,
+    date_submitted,
+    offer_salary,
+    userid,
+  } = req.body;
 
   pool.query(
-    'UPDATE users set NAME = $1, email = $2 WHERE id = $3',
-    [name, email, id],
+    // 'UPDATE users set NAME = $1, email = $2 WHERE id = $3',
+    // [name, email, id],
+    `UPDATE job_application_page SET 
+    application_name = $2, 
+    sourceid = $3, 
+    statusid = $4, 
+    application_folder_link = $5, 
+    resume_doc_link = $6, 
+    resume_pdf_link = $7, 
+    cover_letter_doc_link = $8, 
+    cover_letter_pdf_link = $9, 
+    notes = $10, 
+    date_submitted = $11, 
+    offer_salary = $12, 
+    userid = $13
+    WHERE id = $1`,
+    [
+      id,
+      application_name,
+      sourceid,
+      statusid,
+      application_folder_link,
+      resume_doc_link,
+      resume_pdf_link,
+      cover_letter_doc_link,
+      cover_letter_pdf_link,
+      notes,
+      date_submitted,
+      offer_salary,
+      userid,
+    ],
     (err, results) => {
       if (err) {
         throw error;
