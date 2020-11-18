@@ -44,6 +44,22 @@ class JobApps extends Component {
       });
   }
 
+  deleteApp(app) {
+    fetch(`/jobapps/${app}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const newApps = this.state.apps.slice();
+    for (let i = 0; i < newApps.length; i++) {
+      if (newApps[i].id === app) {
+        newApps.splice(i, 1);
+      }
+    }
+    this.setState({ ...this.state, apps: newApps });
+  }
+
   render() {
     const apps = this.state.apps.map((el, idx) => {
       return (
@@ -69,7 +85,7 @@ class JobApps extends Component {
             <Badge colorScheme="teal">{"$" + el.offer_salary}</Badge>
             <Button
               onClick={() => {
-                deleteApp(el.id);
+                this.deleteApp(el.id);
               }}
             >
               Delete Application
@@ -87,22 +103,5 @@ class JobApps extends Component {
     );
   }
 }
-
-const deleteApp = (app) => {
-  console.log("delete");
-  console.log("app", app);
-  fetch("/jobapps/", {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      // Authorization: token,
-    },
-    // body: JSON.stringify({ id: app }),
-  });
-  // .then(res=> res.json())
-  // .then(data => {
-
-  // })
-};
 
 export default JobApps;
