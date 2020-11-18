@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  Container,
   Heading,
   Box,
   Badge,
@@ -8,18 +7,6 @@ import {
   Avatar,
   Button,
   Text,
-  Modal,
-  ModalOverlay,
-  ModalHeader,
-  ModalContent,
-  ModalCloseButton,
-  ModalBody,
-  FormControl,
-  FormLabel,
-  Input,
-  ModalFooter,
-  useDisclosure,
-  Lorem,
 } from "@chakra-ui/react";
 import NewAppModal from "./newAppModal";
 
@@ -80,7 +67,13 @@ class JobApps extends Component {
             <Text fontSize="sm">{el.application_folder_link}</Text>
             <Text fontSize="sm">{el.date_submitted}</Text>
             <Badge colorScheme="teal">{"$" + el.offer_salary}</Badge>
-            <Button>Delete</Button>
+            <Button
+              onClick={() => {
+                deleteApp(el.id);
+              }}
+            >
+              Delete Application
+            </Button>
           </Box>
         </Flex>
       );
@@ -94,5 +87,22 @@ class JobApps extends Component {
     );
   }
 }
+
+const deleteApp = (app) => {
+  console.log("delete");
+  console.log("app", app);
+  fetch("/jobapps/", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: token,
+    },
+    // body: JSON.stringify({ id: app }),
+  });
+  // .then(res=> res.json())
+  // .then(data => {
+
+  // })
+};
 
 export default JobApps;
