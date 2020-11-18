@@ -6,7 +6,18 @@ import {
   Badge,
   Flex,
   Avatar,
+  Button,
   Text,
+  Modal,
+  ModalOverlay,
+  ModalHeader,
+  ModalContent,
+  ModalCloseButton,
+  ModalBody,
+  FormControl,
+  FormLabel,
+  Input,
+  ModalFooter,
 } from "@chakra-ui/react";
 
 class JobApps extends Component {
@@ -14,12 +25,29 @@ class JobApps extends Component {
     super();
     this.state = {
       apps: [],
-      colors: { true: "green", false: "red" },
+      colors: {
+        1: "yellow",
+        2: "orange",
+        3: "blue",
+        4: "purple",
+        5: "grey",
+        6: "red",
+        7: "green",
+        8: "pink",
+      },
+      sourceImage: {
+        LinkedIn:
+          "https://www.flaticon.com/svg/static/icons/svg/174/174857.svg",
+        Indeed:
+          "https://pbs.twimg.com/profile_images/465901126684913664/sTJZxF5G.jpeg",
+        Monster:
+          "https://media.glassdoor.com/sqll/3411/monster-worldwide-squarelogo-1439837319741.png",
+      },
     };
   }
 
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/todos")
+    fetch("/jobapps/users")
       .then((response) => response.json())
       .then((data) => {
         this.setState({ apps: data });
@@ -29,21 +57,6 @@ class JobApps extends Component {
   render() {
     const apps = this.state.apps.map((el, idx) => {
       return (
-        // <Box
-        //   bg="tomato"
-        //   w="100%"
-        //   p={4}
-        //   color="white"
-        //   key={idx}
-        //   style={{ marginTop: "30px" }}
-        // >
-        //   <div className="appsContainer">
-        //     <p className="apps">Application: {el.title}</p>
-        //     <p className="apps">Source: {el.id}</p>
-        //     <p className="apps">Status: {el.completed}</p>
-        //     <p className="apps">Created at: {el.userId}</p>
-        //   </div>
-        // </Box>
         <Flex
           key={idx}
           style={{
@@ -53,15 +66,17 @@ class JobApps extends Component {
             padding: "20px",
           }}
         >
-          <Avatar src="https://bit.ly/sage-adebayo" />
+          <Avatar src={this.state.sourceImage[el.sourcename]} />
           <Box ml="3">
             <Text fontWeight="bold">
-              {el.title}
-              <Badge ml="1" colorScheme={this.state.colors[el.completed]}>
-                {el.completed.toString()}
+              {el.application_name}
+              <Badge ml="1" colorScheme={this.state.colors[el.status_id]}>
+                {el.status}
               </Badge>
             </Text>
-            <Text fontSize="sm">{el.userId}</Text>
+            <Text fontSize="sm">{el.application_folder_link}</Text>
+            <Text fontSize="sm">{el.date_submitted}</Text>
+            <Badge colorScheme="teal">{"$" + el.offer_salary}</Badge>
           </Box>
         </Flex>
       );
@@ -69,6 +84,7 @@ class JobApps extends Component {
     return (
       <div style={{ marginLeft: "10%", marginRight: "10%" }}>
         <Heading style={{ padding: "20px" }}>Your Job Apps</Heading>
+        <Button>+ New Job App </Button>
         <Heading>{apps}</Heading>
       </div>
     );
