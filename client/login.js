@@ -13,7 +13,7 @@ import {
 const Login = () => {
   return (
     <Container className="container">
-      <Heading>JOB JAB LOGIN</Heading>
+      <Heading className="headers">JOB JAB LOGIN</Heading>
       <FormControl id="register">
         <FormLabel>Email address</FormLabel>
         <Input type="email" />
