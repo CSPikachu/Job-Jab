@@ -7,6 +7,7 @@ const jobAppsRouter = require("./routes/api.js");
 const userRouter = require("./routes/auth.js");
 const cookieParser = require("cookie-parser");
 const authController = require("./controllers/authController");
+const db = require("../server/queries/queries");
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/auth", userRouter);
+app.post("/register", db.createUser);
 app.use("/jobapps", jobAppsRouter);
 
 // Respond with index.html file when user opens the page
@@ -21,24 +23,24 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../index.html"));
 });
 
-app.post(
-  "/login",
-  authController.verifyUser,
-  authController.setCookie,
-  authController.startSession,
-  (req, res) => {
-    res.send({ test: true });
-    console.log("im in the login route");
-  }
-);
+// app.post(
+//   "/login",
+//   authController.verifyUser,
+//   authController.setCookie,
+//   authController.startSession,
+//   (req, res) => {
+//     res.send({ test: true });
+//     console.log("im in the login route");
+//   }
+// );
 
-app.post(
-  "/register",
-  authController.createUser,
-  authController.setCookie,
-  authController.startSession,
-  (req, res) => {}
-);
+// app.post(
+//   "/register",
+//   authController.createUser,
+//   authController.setCookie,
+//   authController.startSession,
+//   (req, res) => {}
+// );
 
 // statically serve everything in the build folder on the route '/build'
 app.use("/dist", express.static(path.join(__dirname, "../dist")));

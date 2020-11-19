@@ -27,7 +27,7 @@ const App = () => {
               <HStack spacing="1.5rem">
                 {!LoggedIn && (
                   <>
-                    <Link to="/login">Login</Link>
+                    <Link to="/auth">Login</Link>
                     <Center height="50px" paddingRight="20px">
                       <Divider orientation="vertical" />
                     </Center>
@@ -46,7 +46,7 @@ const App = () => {
                 {LoggedIn && (
                   <>
                     <Link
-                      to="/login"
+                      to="/auth"
                       onClick={() => {
                         setLoggedIn(false);
                       }}
@@ -75,7 +75,7 @@ const App = () => {
               <Route path="/register">
                 <Register setLoggedIn={setLoggedIn} />
               </Route>
-              <Route path="/login">
+              <Route path="/auth">
                 <Login setLoggedIn={setLoggedIn} />
               </Route>
               <Route path="/">

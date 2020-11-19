@@ -15,7 +15,7 @@ const Login = ({ setLoggedIn }) => {
   const [password, setPassword] = useState("");
 
   const checkLogin = () => {
-    fetch("/login", {
+    fetch("/auth", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,12 +25,10 @@ const Login = ({ setLoggedIn }) => {
       .then((res) => res.json())
       .then((data) => {
         // if successfully logged in
-        if (data.test) {
+        if (data.email) {
           alert("Logged In!");
           setLoggedIn(true);
           // function to redirect to jobapps page
-        } else {
-          alert("uhoh");
         }
       })
       .catch((err) => {

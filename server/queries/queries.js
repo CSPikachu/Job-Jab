@@ -1,5 +1,5 @@
 // const Pool = require('pg').Pool;
-const { Pool } = require('pg');
+const { Pool } = require("pg");
 // const pool = new Pool({
 //   user: 'george',
 //   host: 'localhost',
@@ -9,7 +9,7 @@ const { Pool } = require('pg');
 //   connectionString:
 // })
 const PG_URI =
-  'postgres://rbupcsle:n4-9r8bhAnROYawuMjrFG4k5QQD_guEy@ruby.db.elephantsql.com:5432/rbupcsle';
+  "postgres://rbupcsle:n4-9r8bhAnROYawuMjrFG4k5QQD_guEy@ruby.db.elephantsql.com:5432/rbupcsle";
 
 const pool = new Pool({
   connectionString: PG_URI,
@@ -18,7 +18,7 @@ const pool = new Pool({
 // restrictive permissions that is not accessible from version control, but for the simplicity of this tutorial ,
 // we're keeping it in the same file as the queries.
 const getApps = (req, res, next) => {
-  console.log('HIT GET APPS');
+  console.log("HIT GET APPS");
   pool.query(
     //    'SELECT * FROM job_application_page ORDER BY id ASC',
     `SELECT job_application_page.id AS id,
@@ -52,7 +52,7 @@ JOIN status ON job_application_page.statusid = status.id ORDER BY job_applicatio
 const getAppById = (req, res) => {
   const id = parseInt(req.params.id);
   pool.query(
-    'SELECT * FROM job_application_page WHERE id = $1',
+    "SELECT * FROM job_application_page WHERE id = $1",
     [id],
     (err, results) => {
       if (err) {
@@ -85,13 +85,13 @@ const createApp = (req, res) => {
       application_name,
       sourceid,
       statusid,
-      application_folder_link, 
-      resume_doc_link, 
-      resume_pdf_link, 
-      cover_letter_doc_link, 
-      cover_letter_pdf_link, 
-      notes, 
-      date_submitted, 
+      application_folder_link,
+      resume_doc_link,
+      resume_pdf_link,
+      cover_letter_doc_link,
+      cover_letter_pdf_link,
+      notes,
+      date_submitted,
       offer_salary) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
     [
       userid,
@@ -112,7 +112,7 @@ const createApp = (req, res) => {
         console.log(err);
         throw error;
       }
-      res.status(201).send(`User succesfully added a new application`); // 201 refers to succesful creation of a resource
+      res.status(201).send(`User successfully added a new application`); // 201 refers to successful creation of a resource
     }
   );
 };
@@ -176,7 +176,7 @@ const updateApp = (req, res) => {
 const deleteApp = (req, res) => {
   const id = parseInt(req.params.id);
   pool.query(
-    'DELETE FROM job_application_page WHERE id = $1',
+    "DELETE FROM job_application_page WHERE id = $1",
     [id],
     (err, results) => {
       if (err) {
@@ -186,10 +186,73 @@ const deleteApp = (req, res) => {
     }
   );
 };
+
+const createUser = (req, res) => {
+  console.log("hello");
+  const { email, password } = req.body;
+  //  pool.query('INSERT INTO users (firstname, lastname) VALUES ($1, $2)', [firstname, lastname], (err, results) => {
+  pool.query(
+    "SELECT * FROM users WHERE email = $1",
+    [email],
+    (err, results) => {
+      if (results.rows.length) {
+        console.log(
+          "email already exists. Please choose another one, mon amie"
+        );
+        return next("Registration failed. Email already exists.");
+      }
+      pool.query(
+        `INSERT INTO users (
+        email,
+       password) VALUES ($1, $2)`,
+        [email, password],
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            throw error;
+          }
+          res
+            .status(201)
+            .send(`User successfully created! Welcome to the App ^_^`); // 201 refers to successful creation of a resource
+        }
+      );
+    }
+  );
+};
+
+const loginUser = (req, res, next) => {
+  const { email, password } = req.body;
+  // console.log("email", email);
+  // console.log("password", password);
+  pool.query(
+    "SELECT * FROM users WHERE email = $1 AND password = $2 LIMIT 1",
+    [email, password],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        throw error;
+      }
+      if (!results.rows.length) {
+        console.log("email does not exist");
+        return next(
+          "Error has occurred while trying to log in. Please check your email and/or password"
+        );
+      }
+      //      console.log("results", results);
+      // console.log(results.rows);
+      // console.log(results.rows[0].id);
+      res.status(200).cookie("id", results.rows[0].id).json(results.rows[0]);
+      // res.status(200).cookie("id", results.id).redirect(301, "/");
+    }
+  );
+};
+
 module.exports = {
   getApps,
   getAppById,
   createApp,
   updateApp,
   deleteApp,
+  createUser,
+  loginUser,
 };
