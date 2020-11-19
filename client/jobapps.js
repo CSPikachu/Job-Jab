@@ -44,7 +44,6 @@ class JobApps extends Component {
     fetch('/jobapps')
       .then((response) => response.json())
       .then((data) => {
-        console.log('data', data);
         this.setState({ apps: data });
       });
   }
