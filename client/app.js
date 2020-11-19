@@ -76,7 +76,7 @@ const App = () => {
                 <Register setLoggedIn={setLoggedIn} />
               </Route>
               <Route path="/auth">
-                <Login setLoggedIn={setLoggedIn} />
+                <Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} />
               </Route>
               <Route path="/">
                 <HomePage />

@@ -5,7 +5,7 @@ const jobAppsRouter = express.Router();
 //
 jobAppsRouter.get("/", db.getApps);
 jobAppsRouter.get("/:id", db.getAppById);
-// jobAppsRouter.post('/', db.createApp);
+jobAppsRouter.post("/", db.createApp);
 jobAppsRouter.put("/:id", db.updateApp);
 jobAppsRouter.delete("/:id", db.deleteApp);
 

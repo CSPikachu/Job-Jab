@@ -40,7 +40,8 @@ const getApps = (req, res, next) => {
 FROM job_application_page
 JOIN users ON job_application_page.userid = users.id
 JOIN sources ON job_application_page.sourceid = sources.id
-JOIN status ON job_application_page.statusid = status.id ORDER BY job_application_page.id DESC`,
+JOIN status ON job_application_page.statusid = status.id WHERE users.id = ${req.cookies.id} ORDER BY job_application_page.id DESC`,
+    // ^^^^^^ Let's add a where clause where users.id is equal to req.cookies.id
     (err, results) => {
       if (err) {
         throw error;
@@ -65,7 +66,6 @@ const getAppById = (req, res) => {
 };
 const createApp = (req, res) => {
   const {
-    userid,
     application_name,
     sourceid,
     statusid,
@@ -78,6 +78,10 @@ const createApp = (req, res) => {
     date_submitted,
     offer_salary,
   } = req.body;
+
+  //manually -- let's, right here, set userid = req.cookies.id
+  const userid = req.cookies.id;
+
   //  pool.query('INSERT INTO users (firstname, lastname) VALUES ($1, $2)', [firstname, lastname], (err, results) => {
   pool.query(
     `INSERT INTO job_application_page (
