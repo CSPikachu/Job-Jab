@@ -1,5 +1,5 @@
 // const Pool = require('pg').Pool;
-const { Pool } = require("pg");
+const { Pool } = require('pg');
 // const pool = new Pool({
 //   user: 'george',
 //   host: 'localhost',
@@ -9,7 +9,8 @@ const { Pool } = require("pg");
 //   connectionString:
 // })
 const PG_URI =
-  "postgres://rbupcsle:n4-9r8bhAnROYawuMjrFG4k5QQD_guEy@ruby.db.elephantsql.com:5432/rbupcsle";
+  'postgres://rbupcsle:n4-9r8bhAnROYawuMjrFG4k5QQD_guEy@ruby.db.elephantsql.com:5432/rbupcsle';
+
 const pool = new Pool({
   connectionString: PG_URI,
 });
@@ -17,7 +18,7 @@ const pool = new Pool({
 // restrictive permissions that is not accessible from version control, but for the simplicity of this tutorial ,
 // we're keeping it in the same file as the queries.
 const getApps = (req, res, next) => {
-  console.log("HIT GET APPS");
+  console.log('HIT GET APPS');
   pool.query(
     //    'SELECT * FROM job_application_page ORDER BY id ASC',
     `SELECT job_application_page.id AS id,
@@ -39,7 +40,7 @@ const getApps = (req, res, next) => {
 FROM job_application_page
 JOIN users ON job_application_page.userid = users.id
 JOIN sources ON job_application_page.sourceid = sources.id
-JOIN status ON job_application_page.statusid = status.id`,
+JOIN status ON job_application_page.statusid = status.id ORDER BY job_application_page.id DESC`,
     (err, results) => {
       if (err) {
         throw error;
@@ -51,7 +52,7 @@ JOIN status ON job_application_page.statusid = status.id`,
 const getAppById = (req, res) => {
   const id = parseInt(req.params.id);
   pool.query(
-    "SELECT * FROM job_application_page WHERE id = $1",
+    'SELECT * FROM job_application_page WHERE id = $1',
     [id],
     (err, results) => {
       if (err) {
@@ -84,13 +85,13 @@ const createApp = (req, res) => {
       application_name,
       sourceid,
       statusid,
-      application_folder_link,
-      resume_doc_link,
-      resume_pdf_link,
-      cover_letter_doc_link,
-      cover_letter_pdf_link,
-      notes,
-      date_submitted,
+      application_folder_link, 
+      resume_doc_link, 
+      resume_pdf_link, 
+      cover_letter_doc_link, 
+      cover_letter_pdf_link, 
+      notes, 
+      date_submitted, 
       offer_salary) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
     [
       userid,
@@ -117,6 +118,7 @@ const createApp = (req, res) => {
 };
 const updateApp = (req, res) => {
   const id = parseInt(req.params.id);
+
   const {
     application_name,
     sourceid,
@@ -174,7 +176,7 @@ const updateApp = (req, res) => {
 const deleteApp = (req, res) => {
   const id = parseInt(req.params.id);
   pool.query(
-    "DELETE FROM job_application_page WHERE id = $1",
+    'DELETE FROM job_application_page WHERE id = $1',
     [id],
     (err, results) => {
       if (err) {

@@ -8,6 +8,7 @@ import {
   Avatar,
   Button,
   Text,
+  Textarea,
   Modal,
   ModalOverlay,
   ModalHeader,
@@ -33,14 +34,16 @@ const NewAppModal = (props) => {
       method: "POST",
       body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json" },
-    }).then((response) => props.renderApps());
+    }).then((response) => {
+      props.renderApps();
+      setformData({});
+    });
     //.then update state jobapps by fetching.
     // console.log('target', e.target);
     // console.log('inside handlesubmit console log app name', formData);
   };
+
   const handleChange = (e) => {
-    console.log("handle change", e.target);
-    console.log("handle change", e.target.name);
     let fieldName = e.target.name.toString();
     let obj = { ...formData };
     obj[fieldName] = e.target.value;
@@ -88,7 +91,8 @@ const NewAppModal = (props) => {
                   onChange={handleChange}
                 />
               </FormControl>
-              <FormControl>
+
+              <FormControl isRequired>
                 <FormLabel>Date Submitted</FormLabel>
                 <Input
                   name="date_submitted"

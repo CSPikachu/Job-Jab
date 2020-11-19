@@ -16,8 +16,11 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../index.html"));
 });
 
-// app.get('/signin', (req, res) => {})
-// app.get('/register', (req, res) => {})
+app.post("/login", (req, res) => {
+  res.send({ test: true });
+  console.log("im in the login route");
+});
+app.post("/register", (req, res) => {});
 
 // statically serve everything in the build folder on the route '/build'
 app.use("/dist", express.static(path.join(__dirname, "../dist")));
