@@ -1,4 +1,5 @@
 import React, { Component, form, useState } from 'react';
+
 import {
   Container,
   Heading,
@@ -52,13 +53,12 @@ const NewAppModal = (props) => {
     obj[fieldName] = e.target.value;
     setformData(obj);
   };
-
-  const [formData, setformData] = useState({ application_name: '', userid: 4 });
+  const [formData, setformData] = useState({ application_name: '' });
+  // const [formData, setformData] = useState({ application_name: "", userid: 4 });
 
   return (
     <div>
       <Button onClick={onOpen}>+ New Job App</Button>
-
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
@@ -75,7 +75,6 @@ const NewAppModal = (props) => {
                   onChange={handleChange}
                 />
               </FormControl>
-
               <FormControl isRequired>
                 <FormLabel>Source</FormLabel>
                 <Select
@@ -89,7 +88,6 @@ const NewAppModal = (props) => {
                   <option value='4'>Other</option>
                 </Select>
               </FormControl>
-
               <FormControl isRequired>
                 <FormLabel>Application URL</FormLabel>
                 <Input
@@ -110,7 +108,6 @@ const NewAppModal = (props) => {
                   onChange={handleChange}
                 />
               </FormControl>
-
               <FormControl>
                 <FormLabel>Resume & Cover Letter</FormLabel>
                 <Input
@@ -126,7 +123,6 @@ const NewAppModal = (props) => {
                   onChange={handleChange}
                 />
               </FormControl>
-
               <FormControl isRequired>
                 <FormLabel>Status</FormLabel>
                 <Select
@@ -144,17 +140,15 @@ const NewAppModal = (props) => {
                   <option value='8'>offer rejected</option>
                 </Select>
               </FormControl>
-
               <FormControl>
                 <FormLabel>Notes</FormLabel>
-                <Textarea
+                <Input
                   placeholder='Notes'
                   name='notes'
                   value={formData.notes}
                   onChange={handleChange}
                 />
               </FormControl>
-
               <Input type='submit' onClick={onClose} />
             </form>
           </ModalBody>
@@ -163,6 +157,5 @@ const NewAppModal = (props) => {
     </div>
   );
 };
-
 //
 export default NewAppModal;

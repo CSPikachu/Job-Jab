@@ -40,7 +40,6 @@ class JobApps extends Component {
     };
     this.renderApps = this.renderApps.bind(this);
   }
-
   renderApps() {
     fetch('/jobapps')
       .then((response) => response.json())
@@ -48,11 +47,9 @@ class JobApps extends Component {
         this.setState({ apps: data });
       });
   }
-
   componentDidMount() {
     this.renderApps();
   }
-
   deleteApp(app) {
     fetch(`/jobapps/${app}`, {
       method: 'DELETE',
@@ -68,7 +65,6 @@ class JobApps extends Component {
     }
     this.setState({ ...this.state, apps: newApps });
   }
-
   render() {
     const apps = this.state.apps.map((el, idx) => {
       let date = new Date(el.date_submitted);
@@ -101,6 +97,7 @@ class JobApps extends Component {
       let month = months[date.getMonth()];
       let year = date.getFullYear();
       date = day + ' ' + dateNum + ' ' + month + ' ' + year;
+
       return (
         <Flex
           key={idx}
@@ -120,7 +117,7 @@ class JobApps extends Component {
               </Badge>
             </Text>
             <Text fontSize='sm'>{el.application_folder_link}</Text>
-            <Text fontSize='sm'>{date}</Text>
+            <Text fontSize='sm'>{el.date_submitted}</Text>
             <Badge colorScheme='teal'>
               {el.offer_salary > 0 ? '$' + el.offer_salary : 'N/A'}
             </Badge>

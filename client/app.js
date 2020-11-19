@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './css/styles.scss';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import {
@@ -14,78 +14,85 @@ import Login from './login';
 import JobApps from './jobapps';
 import HomePage from './homepage';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loggedIn: true,
-    };
-  }
-  render() {
-    return (
-      <div className='app'>
-        <ChakraProvider>
-          <Router>
-            <div className='navContainer'>
-              <nav className='navbar'>
-                {!this.state.loggedIn && (
-                  <Flex spacing='30px'>
-                    <Link p='4' to='/'>
-                      Home
+// class App extends Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       loggedIn: true,
+//     };
+//   }
+const App = () => {
+  const [LoggedIn, setLoggedIn] = useState(false);
+  return (
+    <div className='app'>
+      <ChakraProvider>
+        <Router>
+          <div className='navContainer'>
+            <nav className='navbar'>
+              {!LoggedIn && (
+                <Flex spacing='30px'>
+                  <Link p='4' to='/'>
+                    Home
+                  </Link>
+                  <Spacer />
+                  <div className='top-right'>
+                    <Link style={{ marginRight: '10px' }} p='4' to='/auth'>
+                      Login
                     </Link>
-                    <Spacer />
-                    <div className='top-right'>
-                      <Link style={{ marginRight: '10px' }} p='4' to='/login'>
-                        Login
-                      </Link>
-                      <Link p='4' to='/register'>
-                        Register
-                      </Link>
-                    </div>
-                    {/* <img
+                    <Link p='4' to='/register'>
+                      Register
+                    </Link>
+                  </div>
+                  {/* <img
                         style={{ alignContent: 'center' }}
                         src='../imgs/Logo.png'
                         alt='logo'
                       ></img> */}
-                  </Flex>
-                )}
-                {this.state.loggedIn && (
-                  <Flex>
-                    <Link p='4' to='/'>
-                      Home
+                </Flex>
+              )}
+              {LoggedIn && (
+                <Flex>
+                  <Link p='4' to='/'>
+                    Home
+                  </Link>
+                  <Spacer />
+                  <div className='top-right'>
+                    <Link style={{ marginRight: '10px' }} p='4' to='/jobapps'>
+                      Job Apps
                     </Link>
-                    <Spacer />
-                    <div className='top-right'>
-                      <Link style={{ marginRight: '10px' }} p='4' to='/jobapps'>
-                        Job Apps
-                      </Link>
-                      <Link to='/login'>Log Out</Link>
-                    </div>
-                  </Flex>
-                )}
-              </nav>
-              <Switch>
-                {this.state.loggedIn && (
-                  <Route path='/jobapps'>
-                    <JobApps />
-                  </Route>
-                )}
-                <Route path='/register'>
-                  <Register />
+                    <Link
+                      to='/auth'
+                      onClick={() => {
+                        setLoggedIn(false);
+                      }}
+                    >
+                      Log Out
+                    </Link>
+                  </div>
+                </Flex>
+              )}
+            </nav>
+            <Switch>
+              {LoggedIn && (
+                <Route path='/jobapps'>
+                  <JobApps />
                 </Route>
-                <Route path='/login'>
-                  <Login />
-                </Route>
-                <Route path='/'>
-                  <HomePage />
-                </Route>
-              </Switch>
-            </div>
-          </Router>
-        </ChakraProvider>
-      </div>
-    );
-  }
-}
+              )}
+              <Route path='/register'>
+                <Register setLoggedIn={setLoggedIn} />
+              </Route>
+              <Route path='/auth'>
+                <Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} />
+              </Route>
+              <Route path='/'>
+                <HomePage />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </ChakraProvider>
+    </div>
+  );
+};
 
 export default App;
