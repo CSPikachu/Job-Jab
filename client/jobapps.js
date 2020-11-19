@@ -5,9 +5,11 @@ import {
   Badge,
   Flex,
   Avatar,
+  Spacer,
   Button,
   Text,
   Link,
+  extendTheme,
 } from '@chakra-ui/react';
 import NewAppModal from './newAppModal';
 import ViewModal from './viewModal';
@@ -107,16 +109,26 @@ class JobApps extends Component {
             borderRadius: '10px',
             marginTop: '4px',
             padding: '20px',
+            backgroundColor: 'white',
           }}
         >
-          <Avatar src={this.state.sourceImage[el.sourcename]} />
-          <Box ml='3'>
-            <Text fontWeight='bold'>
-              {el.application_name}
-              <Badge ml='1' colorScheme={this.state.colors[el.status_id]}>
-                {el.status}
-              </Badge>
-            </Text>
+          <Avatar
+            src={this.state.sourceImage[el.sourcename]}
+            style={{ margin: '15px' }}
+          />
+          <div>
+            <div>
+              <Text fontWeight='bold'>
+                {el.application_name}
+                <Badge
+                  style={{ alignContent: 'center' }}
+                  ml='1'
+                  colorScheme={this.state.colors[el.status_id]}
+                >
+                  {el.status}
+                </Badge>
+              </Text>
+            </div>
             <Link
               href={el.application_folder_link}
               target='#'
@@ -125,27 +137,74 @@ class JobApps extends Component {
             >
               {el.application_folder_link}
             </Link>
-            <Text fontSize='sm'>{date}</Text>
-            <Badge colorScheme='teal'>
-              {el.offer_salary > 0 ? '$' + el.offer_salary : 'N/A'}
-            </Badge>
+            <Link
+              href={el.resume_doc_link}
+              target='#'
+              style={{ color: 'purple', marginLeft: '50px' }}
+              fontSize='sm'
+            >
+              Resume Doc
+            </Link>
+          </div>
+          <div
+            style={{
+              marginLeft: '10px',
+            }}
+          >
+            <Text
+              style={{
+                border: '1px solid lightgrey',
+                borderRadius: '10px',
+                paddingLeft: '10px',
+                paddingRight: '10px',
+              }}
+              fontSize='sm'
+            >
+              {date}
+            </Text>
+          </div>
+          <Spacer />
+          <Badge
+            colorScheme={el.offer_salary > 150000 ? 'blue' : 'teal'}
+            style={{ height: '40px' }}
+          >
+            {el.offer_salary > 0 ? '$' + el.offer_salary : 'N/A'}
+          </Badge>
+          <Spacer />
+          <div style={{ display: 'flex' }}>
             <Button
+              style={{
+                display: 'inline',
+                margin: '5px',
+                color: 'red',
+              }}
               onClick={() => {
                 this.deleteApp(el.id);
               }}
             >
               Delete Application
             </Button>
-            <ViewModal applicationId={el.id} renderApps={this.renderApps} />
-          </Box>
+            <ViewModal
+              style={{
+                display: 'inline',
+                marginLeft: '10px',
+              }}
+              applicationId={el.id}
+              renderApps={this.renderApps}
+            />
+          </div>
         </Flex>
       );
     });
     return (
-      <div style={{ marginLeft: '10%', marginRight: '10%' }}>
-        <Heading style={{ padding: '20px' }}>Your Job Apps</Heading>
-        <NewAppModal renderApps={this.renderApps} />
-        <Heading>{apps}</Heading>
+      <div style={{ marginLeft: '15%', marginRight: '15%' }}>
+        <Heading className='jobAppHeading' style={{ padding: '20px' }}>
+          Your Job Apps
+        </Heading>
+        <NewAppModal className='newApp' renderApps={this.renderApps} />
+        <Heading style={{ display: 'block' }} className='apps'>
+          {apps}
+        </Heading>
       </div>
     );
   }

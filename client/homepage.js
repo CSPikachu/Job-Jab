@@ -9,9 +9,7 @@ const HomePage = () => {
         <Heading className='headers' size='4xl'>
           Job Jab
         </Heading>
-        <Text className='description'>
-          Welcome to Job Jab, an application to store all your job applications!
-        </Text>
+        <Text className='description'>Organization For A Better Tomorrow</Text>
       </Container>
     </div>
   );
