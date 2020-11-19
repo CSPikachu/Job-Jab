@@ -1,4 +1,5 @@
 import React, { Component, form, useState } from "react";
+
 import {
   Container,
   Heading,
@@ -22,10 +23,12 @@ import {
   useDisclosure,
   Select,
 } from "@chakra-ui/react";
+
 const NewAppModal = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   // set state {}
   // {form: {applicationName: sdfdsf, source: sdfdsfd}}
+
   const handleSubmit = (e) => {
     // fetch <-- state values in the req body
     // bound function in jobapps that gets passed down to newApp which refetches data from API
@@ -34,6 +37,7 @@ const NewAppModal = (props) => {
       method: "POST",
       body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json" },
+
     }).then((response) => {
       props.renderApps();
       setformData({});
@@ -50,6 +54,7 @@ const NewAppModal = (props) => {
     setformData(obj);
   };
   const [formData, setformData] = useState({ application_name: "", userid: 4 });
+
   return (
     <div>
       <Button onClick={onOpen}>+ New Job App</Button>
@@ -65,6 +70,7 @@ const NewAppModal = (props) => {
                 <Input
                   name="application_name"
                   placeholder="Application Name"
+
                   value={formData.application_name}
                   onChange={handleChange}
                 />
@@ -80,6 +86,7 @@ const NewAppModal = (props) => {
                   <option value="2">Indeed</option>
                   <option value="3">Monster</option>
                   <option value="4">Other</option>
+
                 </Select>
               </FormControl>
               <FormControl isRequired>
@@ -87,6 +94,7 @@ const NewAppModal = (props) => {
                 <Input
                   name="application_folder_link"
                   placeholder="Source URL"
+
                   value={formData.application_folder_link}
                   onChange={handleChange}
                 />
@@ -98,6 +106,7 @@ const NewAppModal = (props) => {
                   name="date_submitted"
                   placeholder="Date submitted"
                   type="date"
+
                   value={formData.date_submitted}
                   onChange={handleChange}
                 />
@@ -107,12 +116,14 @@ const NewAppModal = (props) => {
                 <Input
                   placeholder="Resume link"
                   name="resume_doc_link"
+
                   value={formData.resume_doc_link}
                   onChange={handleChange}
                 />
                 <Input
                   placeholder="Cover Letter link"
                   name="cover_letter_doc_link"
+
                   value={formData.cover_letter_doc_link}
                   onChange={handleChange}
                 />
@@ -132,6 +143,7 @@ const NewAppModal = (props) => {
                   <option value="6">rejected</option>
                   <option value="7">offer accepted</option>
                   <option value="8">offer rejected</option>
+
                 </Select>
               </FormControl>
               <FormControl>
@@ -139,11 +151,13 @@ const NewAppModal = (props) => {
                 <Input
                   placeholder="Notes"
                   name="notes"
+
                   value={formData.notes}
                   onChange={handleChange}
                 />
               </FormControl>
               <Input type="submit" onClick={onClose} />
+
             </form>
           </ModalBody>
         </ModalContent>

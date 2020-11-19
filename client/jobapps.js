@@ -10,6 +10,8 @@ import {
 } from "@chakra-ui/react";
 import NewAppModal from "./newAppModal";
 import ViewModal from "./viewModal";
+
+
 class JobApps extends Component {
   constructor() {
     super();
@@ -24,6 +26,7 @@ class JobApps extends Component {
         6: "red",
         7: "green",
         8: "pink",
+
       },
       sourceImage: {
         LinkedIn:
@@ -88,6 +91,7 @@ class JobApps extends Component {
         "October",
         "November",
         "December",
+
       ];
 
       let day = days[date.getDay()];
@@ -95,6 +99,7 @@ class JobApps extends Component {
       let month = months[date.getMonth()];
       let year = date.getFullYear();
       date = day + " " + dateNum + " " + month + " " + year;
+
       return (
         <Flex
           key={idx}
@@ -117,6 +122,7 @@ class JobApps extends Component {
             <Text fontSize="sm">{el.date_submitted}</Text>
             <Badge colorScheme="teal">
               {el.offer_salary > 0 ? "$" + el.offer_salary : "N/A"}
+
             </Badge>
             <Button
               onClick={() => {
@@ -139,4 +145,5 @@ class JobApps extends Component {
     );
   }
 }
+
 export default JobApps;
