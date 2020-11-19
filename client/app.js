@@ -1,84 +1,90 @@
-import React, { Component, useState } from "react";
-import styles from "./css/styles.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { ChakraProvider, HStack, Divider, Center } from "@chakra-ui/react";
-import Register from "./register";
-import Login from "./login";
-import JobApps from "./jobapps";
-import HomePage from "./homepage";
+import React, { Component, useState } from 'react';
+import './css/styles.scss';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  ChakraProvider,
+  HStack,
+  Divider,
+  Center,
+  Flex,
+  Spacer,
+} from '@chakra-ui/react';
+import Register from './register';
+import Login from './login';
+import JobApps from './jobapps';
+import HomePage from './homepage';
 
 // class App extends Component {
 //   constructor() {
 //     super();
 //     this.state = {
-//       loggedIn: false,
+//       loggedIn: true,
 //     };
 //   }
-
 const App = () => {
   const [LoggedIn, setLoggedIn] = useState(false);
-
   return (
-    <div>
+    <div className='app'>
       <ChakraProvider>
         <Router>
-          <div className="navContainer">
-            <nav className="navbar">
-              <HStack spacing="1.5rem">
-                {!LoggedIn && (
-                  <>
-                    <Link to="/auth">Login</Link>
-                    <Center height="50px" paddingRight="20px">
-                      <Divider orientation="vertical" />
-                    </Center>
-                    <Link to="/register">Register</Link>
-                    <Center height="50px">
-                      <Divider orientation="vertical" />
-                    </Center>
-                    <Link to="/">Home</Link>
-                    {/* <img
-                        style={{ alignContent: "center" }}
-                        src="../imgs/Logo.png"
-                        alt="logo"
+          <div className='navContainer'>
+            <nav className='navbar'>
+              {!LoggedIn && (
+                <Flex spacing='30px'>
+                  <Link p='4' to='/'>
+                    Home
+                  </Link>
+                  <Spacer />
+                  <div className='top-right'>
+                    <Link style={{ marginRight: '10px' }} p='4' to='/auth'>
+                      Login
+                    </Link>
+                    <Link p='4' to='/register'>
+                      Register
+                    </Link>
+                  </div>
+                  {/* <img
+                        style={{ alignContent: 'center' }}
+                        src='../imgs/Logo.png'
+                        alt='logo'
                       ></img> */}
-                  </>
-                )}
-                {LoggedIn && (
-                  <>
+                </Flex>
+              )}
+              {LoggedIn && (
+                <Flex>
+                  <Link p='4' to='/'>
+                    Home
+                  </Link>
+                  <Spacer />
+                  <div className='top-right'>
+                    <Link style={{ marginRight: '10px' }} p='4' to='/jobapps'>
+                      Job Apps
+                    </Link>
                     <Link
-                      to="/auth"
+                      to='/auth'
                       onClick={() => {
                         setLoggedIn(false);
                       }}
                     >
                       Log Out
                     </Link>
-                    <Center height="50px" paddingRight="20px">
-                      <Divider orientation="vertical" />
-                    </Center>
-                    <Link to="/jobapps">Job Apps</Link>
-                    <Center height="50px">
-                      <Divider orientation="vertical" />
-                    </Center>
-                    <Link to="/">Home</Link>
-                  </>
-                )}
-              </HStack>
+                  </div>
+                </Flex>
+              )}
             </nav>
-            <Divider orientation="horizontal" />
             <Switch>
               {LoggedIn && (
-                <Route path="/jobapps">
+                <Route path='/jobapps'>
                   <JobApps />
                 </Route>
               )}
-              <Route path="/register">
+              <Route path='/register'>
                 <Register setLoggedIn={setLoggedIn} />
               </Route>
-              <Route path="/auth">
+              <Route path='/auth'>
                 <Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} />
               </Route>
-              <Route path="/">
+              <Route path='/'>
                 <HomePage />
               </Route>
             </Switch>

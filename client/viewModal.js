@@ -22,6 +22,7 @@ import {
   useDisclosure,
   Select,
 } from '@chakra-ui/react';
+import './css/styles.scss';
 
 const ViewModal = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
