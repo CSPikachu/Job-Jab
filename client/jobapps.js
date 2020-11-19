@@ -9,6 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import NewAppModal from "./newAppModal";
+import ViewModal from "./viewModal";
 
 class JobApps extends Component {
   constructor() {
@@ -40,6 +41,7 @@ class JobApps extends Component {
     fetch("/jobapps")
       .then((response) => response.json())
       .then((data) => {
+        console.log("data", data);
         this.setState({ apps: data });
       });
   }
@@ -90,6 +92,7 @@ class JobApps extends Component {
             >
               Delete Application
             </Button>
+            <ViewModal props={el.id} />
           </Box>
         </Flex>
       );
