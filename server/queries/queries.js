@@ -40,7 +40,7 @@ const getApps = (req, res, next) => {
 FROM job_application_page
 JOIN users ON job_application_page.userid = users.id
 JOIN sources ON job_application_page.sourceid = sources.id
-JOIN status ON job_application_page.statusid = status.id`,
+JOIN status ON job_application_page.statusid = status.id ORDER BY job_application_page.id DESC`,
     (err, results) => {
       if (err) {
         throw error;
