@@ -8,6 +8,7 @@ import {
   Avatar,
   Button,
   Text,
+  Textarea,
   Modal,
   ModalOverlay,
   ModalHeader,
@@ -98,7 +99,7 @@ const NewAppModal = (props) => {
                 />
               </FormControl>
 
-              <FormControl>
+              <FormControl isRequired>
                 <FormLabel>Date Submitted</FormLabel>
                 <Input
                   name='date_submitted'
@@ -145,7 +146,7 @@ const NewAppModal = (props) => {
 
               <FormControl>
                 <FormLabel>Notes</FormLabel>
-                <Input
+                <Textarea
                   placeholder='Notes'
                   name='notes'
                   value={formData.notes}

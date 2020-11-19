@@ -100,7 +100,7 @@ class JobApps extends Component {
             >
               Delete Application
             </Button>
-            <ViewModal props={el.id} />
+            <ViewModal applicationId={el.id} renderApps={this.renderApps} />
           </Box>
         </Flex>
       );

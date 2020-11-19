@@ -118,6 +118,7 @@ const createApp = (req, res) => {
 };
 const updateApp = (req, res) => {
   const id = parseInt(req.params.id);
+
   const {
     application_name,
     sourceid,
