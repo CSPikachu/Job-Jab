@@ -70,6 +70,36 @@ class JobApps extends Component {
 
   render() {
     const apps = this.state.apps.map((el, idx) => {
+      let date = new Date(el.date_submitted);
+      let days = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ];
+      let months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
+
+      let day = days[date.getDay()];
+      let dateNum = date.getDate();
+      let month = months[date.getMonth()];
+      let year = date.getFullYear();
+      date = day + ' ' + dateNum + ' ' + month + ' ' + year;
       return (
         <Flex
           key={idx}
@@ -89,7 +119,7 @@ class JobApps extends Component {
               </Badge>
             </Text>
             <Text fontSize='sm'>{el.application_folder_link}</Text>
-            <Text fontSize='sm'>{el.date_submitted}</Text>
+            <Text fontSize='sm'>{date}</Text>
             <Badge colorScheme='teal'>
               {el.offer_salary > 0 ? '$' + el.offer_salary : 'N/A'}
             </Badge>
