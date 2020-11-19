@@ -7,9 +7,9 @@ import {
   Avatar,
   Button,
   Text,
-} from "@chakra-ui/react";
-import NewAppModal from "./newAppModal";
-import ViewModal from "./viewModal";
+} from '@chakra-ui/react';
+import NewAppModal from './newAppModal';
+import ViewModal from './viewModal';
 
 class JobApps extends Component {
   constructor() {
@@ -24,7 +24,6 @@ class JobApps extends Component {
         5: 'grey',
         6: 'red',
         7: 'green',
-
         8: 'pink',
       },
       sourceImage: {
@@ -45,7 +44,6 @@ class JobApps extends Component {
     fetch('/jobapps')
       .then((response) => response.json())
       .then((data) => {
-        console.log("data", data);
         this.setState({ apps: data });
       });
   }
@@ -72,6 +70,36 @@ class JobApps extends Component {
 
   render() {
     const apps = this.state.apps.map((el, idx) => {
+      let date = new Date(el.date_submitted);
+      let days = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ];
+      let months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
+
+      let day = days[date.getDay()];
+      let dateNum = date.getDate();
+      let month = months[date.getMonth()];
+      let year = date.getFullYear();
+      date = day + ' ' + dateNum + ' ' + month + ' ' + year;
       return (
         <Flex
           key={idx}
@@ -91,7 +119,7 @@ class JobApps extends Component {
               </Badge>
             </Text>
             <Text fontSize='sm'>{el.application_folder_link}</Text>
-            <Text fontSize='sm'>{el.date_submitted}</Text>
+            <Text fontSize='sm'>{date}</Text>
             <Badge colorScheme='teal'>
               {el.offer_salary > 0 ? '$' + el.offer_salary : 'N/A'}
             </Badge>
@@ -102,7 +130,7 @@ class JobApps extends Component {
             >
               Delete Application
             </Button>
-            <ViewModal props={el.id} />
+            <ViewModal applicationId={el.id} renderApps={this.renderApps} />
           </Box>
         </Flex>
       );
@@ -117,7 +145,4 @@ class JobApps extends Component {
   }
 }
 
-
-
 export default JobApps;
-//
