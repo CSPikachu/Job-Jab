@@ -7,8 +7,14 @@ import {
   Avatar,
   Button,
   Text,
+<<<<<<< HEAD
 } from '@chakra-ui/react';
 import NewAppModal from './newAppModal';
+=======
+} from "@chakra-ui/react";
+import NewAppModal from "./newAppModal";
+import ViewModal from "./viewModal";
+>>>>>>> 6b4f9799769f72a8043af88eba06560c9e20ae89
 
 class JobApps extends Component {
   constructor() {
@@ -44,6 +50,7 @@ class JobApps extends Component {
     fetch('/jobapps')
       .then((response) => response.json())
       .then((data) => {
+        console.log("data", data);
         this.setState({ apps: data });
       });
   }
@@ -100,6 +107,7 @@ class JobApps extends Component {
             >
               Delete Application
             </Button>
+            <ViewModal props={el.id} />
           </Box>
         </Flex>
       );
