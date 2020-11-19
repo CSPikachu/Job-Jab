@@ -9,6 +9,7 @@ import {
   Heading,
   Button,
 } from "@chakra-ui/react";
+import JobApps from "./jobapps";
 
 const Register = ({ LoggedIn, setLoggedIn }) => {
   const [email, setEmail] = useState("");
@@ -20,12 +21,13 @@ const Register = ({ LoggedIn, setLoggedIn }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, password }),
     })
       .then((res) => res.json())
       .then((data) => {
         if (!data.email === email) {
           alert("Success!");
+          setLoggedIn(true);
           // function to direct to jobapps page
         } else {
           alert("Email already exists");
@@ -38,31 +40,36 @@ const Register = ({ LoggedIn, setLoggedIn }) => {
 
   return (
     <Container className="container">
-      <Heading className="headers">JOB JAB REGISTER</Heading>
-      <FormControl id="register">
-        <FormLabel>Email address</FormLabel>
-        <Input
-          type="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <FormLabel>Password</FormLabel>
-        <Input
-          type="password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <Button
-          type="submit"
-          onClick={registerUser}
-          style={{ marginTop: "8px" }}
-          colorScheme="teal"
-        >
-          Submit
-        </Button>
-      </FormControl>
+      {!LoggedIn && (
+        <>
+          <Heading className="headers">JOB JAB REGISTER</Heading>
+          <FormControl id="register">
+            <FormLabel>Email address</FormLabel>
+            <Input
+              type="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <FormLabel>Password</FormLabel>
+            <Input
+              type="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            <Button
+              type="submit"
+              onClick={registerUser}
+              style={{ marginTop: "8px" }}
+              colorScheme="teal"
+            >
+              Submit
+            </Button>
+          </FormControl>
+        </>
+      )}
+      {LoggedIn && <JobApps />}
     </Container>
   );
 };

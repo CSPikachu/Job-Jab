@@ -53,7 +53,8 @@ const NewAppModal = (props) => {
     obj[fieldName] = e.target.value;
     setformData(obj);
   };
-  const [formData, setformData] = useState({ application_name: "", userid: 4 });
+  const [formData, setformData] = useState({ application_name: "" });
+  // const [formData, setformData] = useState({ application_name: "", userid: 4 });
 
   return (
     <div>
