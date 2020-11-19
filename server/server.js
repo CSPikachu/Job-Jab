@@ -4,6 +4,7 @@ const PORT = 3000;
 const bodyParser = require("body-parser");
 const app = express();
 const jobAppsRouter = require("./routes/api.js");
+const userRouter = require("./routes/auth.js");
 const cookieParser = require("cookie-parser");
 const authController = require("./controllers/authController");
 
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use("/auth", userRouter);
 app.use("/jobapps", jobAppsRouter);
 
 // Respond with index.html file when user opens the page
