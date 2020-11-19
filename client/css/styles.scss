@@ -1,0 +1,113 @@
+.app {
+  // background: #ff7a90;
+  /* background: url(https://wallpaperaccess.com/full/1670732.jpg);
+  background-size: cover;
+  background-position: center; */
+}
+
+.description {
+  font-size: 30px;
+}
+
+.headerContainer {
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  animation: fadeIn ease 1400ms;
+  -webkit-animation: fadeIn ease 1400ms;
+  -webkit-animation-delay: 500ms;
+  animation-delay: 500ms;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+// .navContainer {
+//   // display: flex;
+//   // flex-direction: column;
+//   // align-items: center;
+// }
+.homepage {
+  height: 90vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  text-decoration: none;
+  color: gray;
+  padding: 10px;
+  font-size: 13pt;
+  padding-right: 20px;
+  animation: fadeIn ease 1400ms;
+  -webkit-animation: fadeIn ease 1400ms;
+  -webkit-animation-delay: 200ms;
+  animation-delay: 200ms;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.headers {
+  padding-bottom: 20px;
+  font-size: large;
+}
+
+.appsContainer {
+  display: flex;
+}
+
+.apps {
+  display: inline-flex;
+  margin-right: 30px;
+}
+
+.container {
+  padding: 20px;
+  margin: 20px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

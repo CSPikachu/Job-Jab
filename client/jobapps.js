@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import NewAppModal from './newAppModal';
 import ViewModal from './viewModal';
+import './css/styles.scss';
 
 class JobApps extends Component {
   constructor() {

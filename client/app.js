@@ -1,11 +1,18 @@
-import React, { Component } from "react";
-import styles from "./css/styles.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { ChakraProvider, HStack, Divider, Center } from "@chakra-ui/react";
-import Register from "./register";
-import Login from "./login";
-import JobApps from "./jobapps";
-import HomePage from "./homepage";
+import React, { Component } from 'react';
+import './css/styles.scss';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  ChakraProvider,
+  HStack,
+  Divider,
+  Center,
+  Flex,
+  Spacer,
+} from '@chakra-ui/react';
+import Register from './register';
+import Login from './login';
+import JobApps from './jobapps';
+import HomePage from './homepage';
 
 class App extends Component {
   constructor() {
@@ -16,59 +23,60 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <div className='app'>
         <ChakraProvider>
           <Router>
-            <div className="navContainer">
-              <nav className="navbar">
-                <HStack spacing="1.5rem">
-                  {!this.state.loggedIn && (
-                    <>
-                      <Link to="/">Home</Link>
-                      <Center height="50px" paddingRight="20px">
-                        <Divider orientation="vertical" />
-                      </Center>
-                      <Link to="/login">Login</Link>
-                      <Center height="50px">
-                        <Divider orientation="vertical" />
-                      </Center>
-                      <Link to="/register">Register</Link>
-                      <img
-                        style={{ alignContent: "center" }}
-                        src="../imgs/Logo.png"
-                        alt="logo"
-                      ></img>
-                    </>
-                  )}
-                  {this.state.loggedIn && (
-                    <>
-                      <Link to="/">Home</Link>
-                      <Center height="50px" paddingRight="20px">
-                        <Divider orientation="vertical" />
-                      </Center>
-                      <Link to="/login">Log Out</Link>
-                      <Center height="50px">
-                        <Divider orientation="vertical" />
-                      </Center>
-                      <Link to="/jobapps">Job Apps</Link>
-                    </>
-                  )}
-                </HStack>
+            <div className='navContainer'>
+              <nav className='navbar'>
+                {!this.state.loggedIn && (
+                  <Flex spacing='30px'>
+                    <Link p='4' to='/'>
+                      Home
+                    </Link>
+                    <Spacer />
+                    <div className='top-right'>
+                      <Link style={{ marginRight: '10px' }} p='4' to='/login'>
+                        Login
+                      </Link>
+                      <Link p='4' to='/register'>
+                        Register
+                      </Link>
+                    </div>
+                    {/* <img
+                        style={{ alignContent: 'center' }}
+                        src='../imgs/Logo.png'
+                        alt='logo'
+                      ></img> */}
+                  </Flex>
+                )}
+                {this.state.loggedIn && (
+                  <Flex>
+                    <Link p='4' to='/'>
+                      Home
+                    </Link>
+                    <Spacer />
+                    <div className='top-right'>
+                      <Link style={{ marginRight: '10px' }} p='4' to='/jobapps'>
+                        Job Apps
+                      </Link>
+                      <Link to='/login'>Log Out</Link>
+                    </div>
+                  </Flex>
+                )}
               </nav>
-              <Divider orientation="horizontal" />
               <Switch>
                 {this.state.loggedIn && (
-                  <Route path="/jobapps">
+                  <Route path='/jobapps'>
                     <JobApps />
                   </Route>
                 )}
-                <Route path="/register">
+                <Route path='/register'>
                   <Register />
                 </Route>
-                <Route path="/login">
+                <Route path='/login'>
                   <Login />
                 </Route>
-                <Route path="/">
+                <Route path='/'>
                   <HomePage />
                 </Route>
               </Switch>
