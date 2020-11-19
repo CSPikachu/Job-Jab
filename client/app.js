@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+// import ReactLogo from '../imgs/Tracing.svg';
 import './css/styles.scss';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import {
@@ -35,6 +36,14 @@ const App = () => {
                     Home
                   </Link>
                   <Spacer />
+                  <img
+                    src='https://svgshare.com/i/Rc3.svg'
+                    alt='React Logo'
+                    width='250px'
+                    height='250px'
+                    style={{ paddingLeft: '100px' }}
+                  />
+                  <Spacer />
                   <div className='top-right'>
                     <Link style={{ marginRight: '10px' }} p='4' to='/auth'>
                       Login
@@ -43,11 +52,6 @@ const App = () => {
                       Register
                     </Link>
                   </div>
-                  {/* <img
-                        style={{ alignContent: 'center' }}
-                        src='../imgs/Logo.png'
-                        alt='logo'
-                      ></img> */}
                 </Flex>
               )}
               {LoggedIn && (
@@ -55,6 +59,14 @@ const App = () => {
                   <Link p='4' to='/'>
                     Home
                   </Link>
+                  <Spacer />
+                  <img
+                    src='https://svgshare.com/i/Rc3.svg'
+                    alt='React Logo'
+                    width='250px'
+                    height='250px'
+                    style={{ paddingLeft: '100px' }}
+                  />
                   <Spacer />
                   <div className='top-right'>
                     <Link style={{ marginRight: '10px' }} p='4' to='/jobapps'>
