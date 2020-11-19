@@ -7,6 +7,7 @@ import {
   Avatar,
   Button,
   Text,
+  Link,
 } from '@chakra-ui/react';
 import NewAppModal from './newAppModal';
 import ViewModal from './viewModal';
@@ -116,8 +117,15 @@ class JobApps extends Component {
                 {el.status}
               </Badge>
             </Text>
-            <Text fontSize='sm'>{el.application_folder_link}</Text>
-            <Text fontSize='sm'>{el.date_submitted}</Text>
+            <Link
+              href={el.application_folder_link}
+              target='#'
+              style={{ color: 'blue' }}
+              fontSize='sm'
+            >
+              {el.application_folder_link}
+            </Link>
+            <Text fontSize='sm'>{date}</Text>
             <Badge colorScheme='teal'>
               {el.offer_salary > 0 ? '$' + el.offer_salary : 'N/A'}
             </Badge>
