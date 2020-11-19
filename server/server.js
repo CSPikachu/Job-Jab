@@ -4,10 +4,13 @@ const PORT = 3000;
 const bodyParser = require("body-parser");
 const app = express();
 const jobAppsRouter = require("./routes/api.js");
+const cookieParser = require("cookie-parser");
+const authController = require("./controllers/authController");
 
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use("/jobapps", jobAppsRouter);
 
@@ -16,11 +19,24 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../index.html"));
 });
 
-app.post("/login", (req, res) => {
-  res.send({ test: true });
-  console.log("im in the login route");
-});
-app.post("/register", (req, res) => {});
+app.post(
+  "/login",
+  authController.verifyUser,
+  authController.setCookie,
+  authController.startSession,
+  (req, res) => {
+    res.send({ test: true });
+    console.log("im in the login route");
+  }
+);
+
+app.post(
+  "/register",
+  authController.createUser,
+  authController.setCookie,
+  authController.startSession,
+  (req, res) => {}
+);
 
 // statically serve everything in the build folder on the route '/build'
 app.use("/dist", express.static(path.join(__dirname, "../dist")));
