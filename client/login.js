@@ -39,9 +39,9 @@ const Login = ({ LoggedIn, setLoggedIn }) => {
   };
 
   return (
-    <Container className='container'>
+    <div>
       {!LoggedIn && (
-        <>
+        <Container className='container'>
           <Heading className='headers'>JOB JAB LOGIN</Heading>
           <FormControl id='register'>
             <FormLabel>Email address</FormLabel>
@@ -69,10 +69,10 @@ const Login = ({ LoggedIn, setLoggedIn }) => {
               Submit
             </Button>
           </FormControl>
-        </>
+        </Container>
       )}
       {LoggedIn && <JobApps />}
-    </Container>
+    </div>
   );
 };
 
