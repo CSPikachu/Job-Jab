@@ -21,12 +21,17 @@ body {
   background-position: center; */
 }
 
+:hover {
+  color: '#708d8a';
+}
+
 .navbar {
   text-decoration: none;
   color: #384342;
-  padding: 10px;
-  font-size: 13pt;
-  padding-right: 20px;
+  padding: 30px;
+  font-size: 14pt;
+  font-weight: 'bold';
+  padding-right: 30px;
   animation: fadeIn ease 1400ms;
   -webkit-animation: fadeIn ease 1400ms;
   -webkit-animation-delay: 200ms;
@@ -53,7 +58,7 @@ body {
 }
 
 .homepage {
-  height: 65vh;
+  height: 68vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -88,13 +93,14 @@ body {
   animation-fill-mode: forwards;
 }
 
-.newApp {
+.newAppButton {
   animation: fadeIn ease 1400ms;
   -webkit-animation: fadeIn ease 1400ms;
   -webkit-animation-delay: 600ms;
   animation-delay: 600ms;
   opacity: 0;
   animation-fill-mode: forwards;
+  padding-bottom: 10px;
 }
 
 .headers {
@@ -114,6 +120,7 @@ body {
 .container {
   padding: 20px;
   margin: 20px;
+  margin-top: 120px;
   animation: fadeIn ease 1200ms;
   -webkit-animation: fadeIn ease 1200ms;
   -webkit-animation-delay: 200ms;

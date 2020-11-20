@@ -47,7 +47,7 @@ const Login = ({ LoggedIn, setLoggedIn }) => {
     <div>
       {!LoggedIn && (
         <Container className='container'>
-          <Heading className='headers'>Job Jab Login</Heading>
+          <Heading className='headers'>Login</Heading>
           <FormControl id='register'>
             <FormLabel>Email address</FormLabel>
             <Input
@@ -69,6 +69,7 @@ const Login = ({ LoggedIn, setLoggedIn }) => {
                 checkLogin();
               }}
               bg='#708d8a'
+              _hover={{ color: '#708d8a', bg: '#eaf1f3' }}
               style={{ marginTop: '12px' }}
             >
               Submit

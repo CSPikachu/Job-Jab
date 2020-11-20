@@ -99,7 +99,7 @@ class JobApps extends Component {
       let dateNum = date.getDate();
       let month = months[date.getMonth()];
       let year = date.getFullYear();
-      date = day + ' ' + dateNum + ' ' + month + ' ' + year;
+      date = day + ' ' + dateNum + ' ' + month;
 
       return (
         <Flex
@@ -135,7 +135,7 @@ class JobApps extends Component {
               style={{ color: 'blue' }}
               fontSize='sm'
             >
-              {el.application_folder_link}
+              Application URL
             </Link>
             <Link
               href={el.resume_doc_link}
@@ -197,12 +197,18 @@ class JobApps extends Component {
       );
     });
     return (
-      <div style={{ marginLeft: '15%', marginRight: '15%' }}>
-        <Heading className='jobAppHeading' style={{ padding: '20px' }}>
-          Your Job Apps
-        </Heading>
-        <NewAppModal className='newApp' renderApps={this.renderApps} />
-        <Heading style={{ display: 'block' }} className='apps'>
+      <div style={{ marginLeft: '10%', marginRight: '10%' }}>
+        <Heading className='jobAppHeading'>Your Job Apps</Heading>
+        <div className='newAppButton'>
+          <NewAppModal renderApps={this.renderApps} />
+        </div>
+        <Heading
+          style={{
+            marginBottom: '200px',
+            display: 'block',
+          }}
+          className='apps'
+        >
           {apps}
         </Heading>
       </div>
