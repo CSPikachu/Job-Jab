@@ -43,7 +43,7 @@ const Register = ({ LoggedIn, setLoggedIn }) => {
     <Container className='container'>
       {!LoggedIn && (
         <>
-          <Heading className='headers'>JOB JAB REGISTER</Heading>
+          <Heading className='headers'>Register a New Account</Heading>
           <FormControl id='register'>
             <FormLabel>Email address</FormLabel>
             <Input
@@ -52,7 +52,7 @@ const Register = ({ LoggedIn, setLoggedIn }) => {
                 setEmail(e.target.value);
               }}
             />
-            <FormLabel>Password</FormLabel>
+            <FormLabel style={{ marginTop: '10px' }}>Password</FormLabel>
             <Input
               type='password'
               onChange={(e) => {
@@ -62,8 +62,9 @@ const Register = ({ LoggedIn, setLoggedIn }) => {
             <Button
               type='submit'
               onClick={registerUser}
-              style={{ marginTop: '8px' }}
-              colorScheme='teal'
+              style={{ marginTop: '12px' }}
+              bg='#708d8a'
+              _hover={{ color: '#708d8a', bg: '#eaf1f3' }}
             >
               Submit
             </Button>

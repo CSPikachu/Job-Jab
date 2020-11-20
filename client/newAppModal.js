@@ -58,7 +58,14 @@ const NewAppModal = (props) => {
 
   return (
     <div>
-      <Button onClick={onOpen}>+ New Job App</Button>
+      <Button
+        bg='#708d8a'
+        _hover={{ color: '#708d8a', bg: '#eaf1f3' }}
+        style={{ marginTop: '12px' }}
+        onClick={onOpen}
+      >
+        + New Job App
+      </Button>
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
